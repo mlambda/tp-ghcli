@@ -1,6 +1,8 @@
 """Command Line Interface (CLI) to interact with GitHub issues."""
 import argparse
 
+from .api import list_issues
+
 
 def _create_parser() -> argparse.ArgumentParser:
     # Création du parseur d'arguments
@@ -31,4 +33,4 @@ def main() -> None:
     args = parser.parse_args()
 
     # Utilisation de ces arguments
-    print(f"Arguments récupérés : owner={args.owner}, repo={args.repo}")
+    list_issues(owner=args.owner, repo=args.repo)
