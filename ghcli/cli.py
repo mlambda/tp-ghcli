@@ -33,4 +33,6 @@ def main() -> None:
     args = parser.parse_args()
 
     # Utilisation de ces arguments
-    list_issues(owner=args.owner, repo=args.repo)
+    issues = list_issues(owner=args.owner, repo=args.repo)
+    for title, body, url in issues:
+        print(f"{url} - {title} - {body}")

@@ -8,6 +8,7 @@ version = "0.1.0"
 
 [tool.poetry.dependencies]
 python = "^3.10"
+requests = "^2.31.0"
 
 [tool.poetry.group.dev.dependencies]
 black = "^23.7.0"
@@ -18,6 +19,7 @@ isort = "^5.12.0"
 mypy = "^1.5.1"
 pylint = "^2.17.5"
 pytest = "^7.4.1"
+types-requests = "^2.31.0.2"
 
 [tool.poetry.scripts]
 ghcli = "ghcli.cli:main"
