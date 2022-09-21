@@ -59,11 +59,11 @@ def main() -> None:
         # Ensuite nous pouvons utiliser les arguments récupérer pour appeler la fonction
         # correspondante
         issues = list_issues(owner=args.owner, repo=args.repo)
-        for title, body, url in issues:
-            print(f"{url} - {title} - {body}")
+        for issue in issues:
+            print(f"{issue.url} - {issue.title} - {issue.body}")
     else:
         # Et de même pour la commande create
-        title, body, url = create_issue(
+        issue = create_issue(
             owner=args.owner, repo=args.repo, title=args.title, body=args.body
         )
-        print(f"{url} - {title} - {body}")
+        print(f"{issue.url} - {issue.title} - {issue.body}")

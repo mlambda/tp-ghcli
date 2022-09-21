@@ -5,6 +5,8 @@ import typing
 
 import requests
 
+from .model import Issue
+
 
 def _get_token() -> str:
     try:
@@ -18,7 +20,7 @@ def _get_token() -> str:
         sys.exit(1)
 
 
-def list_issues(owner: str, repo: str) -> typing.List[typing.Tuple[str, str, str]]:
+def list_issues(owner: str, repo: str) -> typing.List[Issue]:
     """Retrieve issues of a GitHub repository."""
     # Appel à l'API GitHub comme détaillé ici :
     # https://docs.github.com/en/rest/issues/issues#list-repository-issues
@@ -39,16 +41,13 @@ def list_issues(owner: str, repo: str) -> typing.List[typing.Tuple[str, str, str
     # Nous pouvons maintenant récupérer le contenu de la réponse avec la méthode json.
     # Celle-ci va nous renvoyer une structure de données Python qui correspond au json
     # de la réponse. Ici, ce sera une liste de dictionnaires
-    data = response.json()
+    issues = response.json()
 
-    # Nous filtrons enfin cette structure pour renvoyer seulement 3 valeurs de chaque
-    # dictionnaire : le titre, le corps et l'url des issues.
-    return [(issue["title"], issue["body"], issue["html_url"]) for issue in data]
+    # Nous créons enfin des objets Issue à l'aide de chaque dictionnaire
+    return [Issue.from_dict(issue) for issue in issues]
 
 
-def create_issue(
-    owner: str, repo: str, title: str, body: str
-) -> typing.Tuple[str, str, str]:
+def create_issue(owner: str, repo: str, title: str, body: str) -> Issue:
     """Retrieve issues of a GitHub repository."""
     # Appel à l'API GitHub comme détaillé ici :
     # https://docs.github.com/en/rest/issues/issues#create-an-issue
@@ -72,6 +71,5 @@ def create_issue(
     # de la réponse. Ici, ce sera un dictionnaire
     issue = response.json()
 
-    # Nous filtrons enfin cette structure pour renvoyer seulement 3 valeurs : le titre,
-    # le corps et l'url.
-    return issue["title"], issue["body"], issue["html_url"]
+    # Nous créons enfin un objet Issue à l'aide du dictionnaire
+    return Issue.from_dict(issue)
