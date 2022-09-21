@@ -3,11 +3,13 @@ import os
 import sys
 import typing
 
+import deal
 import requests
 
 from .model import Issue
 
 
+@deal.raises(SystemExit)
 def _get_token() -> str:
     try:
         return os.environ["GHCLI_TOKEN"]
@@ -20,6 +22,11 @@ def _get_token() -> str:
         sys.exit(1)
 
 
+@deal.pre(lambda owner, repo: bool(owner) and bool(repo))
+@deal.pre(lambda owner, repo: "/" not in owner)
+@deal.pre(lambda owner, repo: "/" not in repo)
+@deal.post(lambda issues: all(issue.url.startswith("http") for issue in issues))
+@deal.raises(SystemExit, requests.HTTPError)
 def list_issues(owner: str, repo: str) -> typing.List[Issue]:
     """Retrieve issues of a GitHub repository."""
     # Appel à l'API GitHub comme détaillé ici :
@@ -47,6 +54,11 @@ def list_issues(owner: str, repo: str) -> typing.List[Issue]:
     return [Issue.from_dict(issue) for issue in issues]
 
 
+@deal.pre(lambda owner, repo, title, body: bool(owner) and bool(repo))
+@deal.pre(lambda owner, repo, title, body: "/" not in owner)
+@deal.pre(lambda owner, repo, title, body: "/" not in repo)
+@deal.post(lambda issue: issue.url.startswith("http"))
+@deal.raises(requests.HTTPError, SystemExit)
 def create_issue(owner: str, repo: str, title: str, body: str) -> Issue:
     """Retrieve issues of a GitHub repository."""
     # Appel à l'API GitHub comme détaillé ici :

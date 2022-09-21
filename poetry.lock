@@ -203,6 +203,24 @@ files = [
 ]
 
 [[package]]
+name = "deal"
+version = "4.24.2"
+description = "**Deal** is a Python library for [design by contract][wiki] (DbC) programming."
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "deal-4.24.2-py3-none-any.whl", hash = "sha256:8fe32b88a558594e43f2ca18ab66ade5193bb33702bb57b7efbd171341f01bf4"},
+    {file = "deal-4.24.2.tar.gz", hash = "sha256:7b57eefd772934b692a1476a201d0a11282c1c1ba5a54488a19291c363bca241"},
+]
+
+[package.extras]
+all = ["astroid (>=2.11.0)", "deal-solver", "hypothesis", "pygments", "typeguard (>=3.0.0)", "vaa (>=0.2.1)"]
+docs = ["m2r2", "myst-parser", "sphinx (==3.5.*)", "sphinx-rtd-theme (==0.5.*)"]
+integration = ["astroid (>=2.11.0)", "deal-solver", "flake8", "hypothesis", "marshmallow", "pygments", "sphinx (>=4.5.0)", "typeguard (<4.0.0)", "vaa (>=0.2.1)"]
+lint = ["deal-solver", "flake8", "flake8-commas", "flake8-quotes", "hypothesis", "isort", "mypy (>=0.900)", "mypy_test (>=0.1.1)", "pygments", "typeguard (<4.0.0)", "unify"]
+test = ["coverage-conditional-plugin", "coverage[toml]", "docstring-parser", "pytest", "pytest-cov", "urllib3"]
+
+[[package]]
 name = "dill"
 version = "0.3.7"
 description = "serialize all of Python"
@@ -766,4 +784,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "a25b4c572a80ea052b40e7bc8fae6b3b2718acd3a7f56aee86448ec8137d2348"
+content-hash = "11a2c9b151e44b70ab6851f77657ab65d9e7d897c10429e8c862448cf097e44e"
