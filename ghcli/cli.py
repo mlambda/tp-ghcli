@@ -1,7 +1,6 @@
 """Command Line Interface (CLI) to interact with GitHub issues."""
-import argparse
 
-from .api import create_issue, list_issues
+import argparse
 
 
 def _add_repo_args(parser: argparse.ArgumentParser) -> None:
@@ -26,7 +25,7 @@ def _create_parser() -> argparse.ArgumentParser:
 
     # Création d'un objet subparsers. Celui-ci nous permettra de créer un parseur par
     # commande : un pour la commande list, un pour la commande create
-    subparsers = parser.add_subparsers(help="Commands", dest="command", required=True)
+    subparsers = parser.add_subparsers(help="Commands", dest="command")
 
     # Création du sous-parseur pour la commande list
     parser_list = subparsers.add_parser("list")
@@ -56,14 +55,23 @@ def main() -> None:
 
     # D'abord, vérifions quelle commande a été appelée
     if args.command == "list":
+        from .api import list_issues
+
         # Ensuite nous pouvons utiliser les arguments récupérer pour appeler la fonction
         # correspondante
         issues = list_issues(owner=args.owner, repo=args.repo)
         for issue in issues:
             print(f"{issue.url} - {issue.title} - {issue.body}")
-    else:
+    if args.command == "create":
+        from .api import create_issue
+
         # Et de même pour la commande create
         issue = create_issue(
             owner=args.owner, repo=args.repo, title=args.title, body=args.body
         )
         print(f"{issue.url} - {issue.title} - {issue.body}")
+    # Si aucune commande n'a été appelée, on lance l'IHM
+    else:
+        from .gui import create_gui
+
+        create_gui()
