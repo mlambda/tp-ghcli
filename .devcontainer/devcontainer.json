@@ -22,22 +22,20 @@
 				"editor.rulers": [
 					88
 				],
+				"python.defaultInterpreterPath": ".venv/bin/python",
 				"[python]": {
 					"editor.tabSize": 4,
-					"editor.defaultFormatter": "ms-python.black-formatter",
+					"editor.defaultFormatter": "charliermarsh.ruff",
 					"editor.codeActionsOnSave": {
-						"source.organizeImports": true
+						"source.organizeImports": "explicit"
 					}
 				},
 				"editor.formatOnSave": true
 			},
 			"extensions": [
 				"ms-python.python",
-				"ms-python.black-formatter",
-				"ms-python.flake8",
-				"ms-python.isort",
-				"ms-python.mypy-type-checker",
-				"ms-python.pylint",
+				"matangover.mypy",
+				"charliermarsh.ruff",
 				"be5invis.toml",
 				"vscode-icons-team.vscode-icons",
 				"MS-CEINTL.vscode-language-pack-fr",

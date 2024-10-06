@@ -1,8 +1,5 @@
 check:
-	black --check ghcli
-	isort --check-only ghcli
-	mypy ghcli
-	flake8 --count
-	pylint ghcli
+	ruff check ghcli tests
+	mypy ghcli tests
 
 .PHONY: check
