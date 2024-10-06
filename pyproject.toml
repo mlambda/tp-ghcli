@@ -7,26 +7,26 @@ readme = "README.md"
 version = "0.1.0"
 
 [tool.poetry.dependencies]
-deal = "^4.24.2"
+deal = "^4.24.4"
 python = "^3.10"
-requests = "^2.31.0"
+requests = "^2.32.3"
 
 [tool.poetry.group.dev.dependencies]
-black = "^23.7.0"
-flake8 = "^6.1.0"
-flake8-bugbear = "^23.7.10"
-flake8-docstrings = "^1.7.0"
-isort = "^5.12.0"
-mypy = "^1.5.1"
-pylint = "^2.17.5"
-pytest = "^7.4.1"
-types-requests = "^2.31.0.2"
+mypy = "^1.11.2"
+pytest = "^8.3.3"
+ruff = "^0.6.9"
+types-requests = "^2.32.0.20240914"
 
 [tool.poetry.scripts]
 ghcli = "ghcli.cli:main"
 
-[tool.isort]
-profile = "black"
+[tool.ruff]
+target-version = "py310"
+
+[tool.mypy]
+disallow_untyped_defs = true
+ignore_missing_imports = true
+strict_optional = true
 
 [build-system]
 build-backend = "poetry.core.masonry.api"
